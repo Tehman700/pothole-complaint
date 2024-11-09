@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pothole Complaint Server</title>
+    <style>
+        /* General styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        h1 {
+            color: #007acc;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the container holding cards */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        /* Styling for each card */
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Address text styling */
+        .card .content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .address {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        /* Styling for image */
+        .image-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Top right corner image */
+        .top-right-image {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top right image -->
+<img src="uet.png" class="top-right-image" />
+
+<h1>Uploaded Complaints</h1>
+
+<!-- Container to hold all report cards -->
+<div class="container">
+    <!-- Each card for report data -->
+    <div class="card" th:each="data : ${dataList}">
+        <div class="image-container">
+            <img th:src="'data:image/jpeg;base64,' + ${data.imageBase64}" alt="Report Image" width="100%" />
+        </div>
+        <div class="content">
+            <div class="address" th:text="${data.text}">Sample Text</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
